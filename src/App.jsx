@@ -1,5 +1,11 @@
+import { ProductsPage } from './pages/ProductsPage'
+
 function App() {
-  return <div>Hello, there! </div>
+  return (
+    <>
+      <ProductsPage />
+    </>
+  )
 }
 
 export default App
