@@ -1,5 +1,14 @@
-import { Card, CardContent, CardMedia, Typography } from '@mui/material'
+import {
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  Stack,
+  Typography,
+} from '@mui/material'
 import PropTypes from 'prop-types'
+import { Link as RouterLink } from 'react-router-dom'
+import { routes } from '../../App'
 
 function ProductCard({ product, isFetching }) {
   return (
@@ -9,9 +18,22 @@ function ProductCard({ product, isFetching }) {
         <Typography variant="h5" component="h2" minHeight={65}>
           {product.name}
         </Typography>
-        <Typography>
-          Цена: {product.price} руб. {isFetching && ' ...'}
-        </Typography>
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="space-between"
+        >
+          <Typography>
+            Цена: {product.price} руб. {isFetching && ' ...'}
+          </Typography>
+          <Button
+            color="primary"
+            to={routes.basket.path}
+            component={RouterLink}
+          >
+            В корзину
+          </Button>
+        </Stack>
       </CardContent>
     </Card>
   )

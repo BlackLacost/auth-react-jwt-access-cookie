@@ -8,7 +8,7 @@ export const ProductsPage = () => {
   if (productsQuery.isLoading) return 'Loading Products...'
 
   return (
-    <Grid p={3} container spacing={2}>
+    <Grid py={3} container spacing={2}>
       {productsQuery.data.products.map((product) => (
         <Grid key={product.id} item xs={12} sm={6} md={4} lg={3}>
           <ProductCard
