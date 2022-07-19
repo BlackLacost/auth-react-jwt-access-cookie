@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
+    "@hookform/resolvers": "^2.9.6",
     "@mui/material": "^5.9.0",
     "axios": "^0.27.2",
     "prop-types": "^15.8.1",
@@ -13,7 +14,8 @@
     "react-hook-form": "^7.33.1",
     "react-query": "^3.39.1",
     "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "BROWSER=none react-scripts start",

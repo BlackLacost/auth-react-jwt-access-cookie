@@ -11,6 +11,13 @@ const theme = createTheme({
   components: {
     MuiLink: { defaultProps: { underline: 'hover', component: RouterLink } },
     MuiButton: { defaultProps: { variant: 'contained' } },
+    MuiSnackbar: {
+      defaultProps: {
+        anchorOrigin: { vertical: 'top', horizontal: 'center' },
+        autoHideDuration: 4000,
+      },
+    },
+    MuiMenuItem: { defaultProps: { component: RouterLink } },
   },
 })
 

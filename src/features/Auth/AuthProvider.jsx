@@ -9,6 +9,7 @@ const initialTokenPayload = {
   sub: null,
   email: null,
   name: null,
+  role: null,
   iat: null,
   exp: null,
 }

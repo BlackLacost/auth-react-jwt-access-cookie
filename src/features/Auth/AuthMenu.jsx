@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material'
 import { useState } from 'react'
-import { authRoutes } from '../../App'
+import { authRoutes, routes } from '../../App'
 import { useAuth } from './useAuth'
 
 export const AuthMenu = () => {
@@ -26,11 +26,15 @@ export const AuthMenu = () => {
         </Stack>
       </IconButton>
       <Menu open={open} anchorEl={anchorEl} onClose={close}>
+        {tokenPayload.role === 'ADMIN' && (
+          <MenuItem to={routes.admin.path}>{routes.admin.name}</MenuItem>
+        )}
         <MenuItem
           onClick={async () => {
             close()
             await signout()
           }}
+          component="button"
         >
           {authRoutes.signout.name}
         </MenuItem>

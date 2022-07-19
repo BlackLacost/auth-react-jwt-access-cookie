@@ -1,42 +1,20 @@
-import {
-  Alert,
-  Box,
-  Button,
-  Link,
-  Paper,
-  Snackbar,
-  Stack,
-  TextField,
-  Typography,
-} from '@mui/material'
+import { Alert, Box, Paper, Snackbar } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { authRoutes, routes } from '../App'
+import { SigninForm } from '../features/Auth/SigninForm'
+import { SignupForm } from '../features/Auth/SignupForm'
 import { useAuth } from '../features/Auth/useAuth'
-import { fetchApi } from '../fetchApi'
 
 export const AuthPage = () => {
-  const navigate = useNavigate()
-  const location = useLocation()
-  const { register, handleSubmit } = useForm()
   const { isAuth, setTokenPayload } = useAuth()
   const [message, setMessage] = useState(null)
 
-  const open = Boolean(message)
-  const isSignin = location.pathname === authRoutes.signin.path
+  const navigate = useNavigate()
+  const location = useLocation()
 
-  const onSubmit = async (data) => {
-    try {
-      const res = await fetchApi.post(location.pathname, data)
-      setMessage(null)
-      localStorage.setItem('me', JSON.stringify(res.data.tokenPayload))
-      setTokenPayload(res.data.tokenPayload)
-    } catch (err) {
-      console.log(err)
-      setMessage(err.response.data.message)
-    }
-  }
+  const open = Boolean(message)
+  const isSignup = location.pathname === authRoutes.signup.path
 
   useEffect(() => {
     if (isAuth()) {
@@ -55,49 +33,20 @@ export const AuthPage = () => {
       }}
     >
       <Paper>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <Stack p={4} spacing={2}>
-            <Typography alignSelf="center" variant="h4" component="h1">
-              {isSignin ? 'Вход' : 'Выйти'}
-            </Typography>
-            <Snackbar
-              open={open}
-              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-              autoHideDuration={4000}
-              onClose={() => setMessage(null)}
-            >
-              <Alert severity="error">{message}</Alert>
-            </Snackbar>
-
-            <TextField label="Почта" required {...register('email')} />
-            {!isSignin && <TextField label="Имя" {...register('name')} />}
-            <TextField
-              required
-              label="Пароль"
-              type="password"
-              {...register('password')}
-            />
-            <Stack direction="row" alignItems="center" spacing={3}>
-              {isSignin ? (
-                <>
-                  <Typography>
-                    Ещё нет аккаунта?{' '}
-                    <Link to={authRoutes.signup.path}>Зарегистрируйтесь</Link>
-                  </Typography>
-                  <Button type="submit">{authRoutes.signin.name}</Button>
-                </>
-              ) : (
-                <>
-                  <Typography>
-                    Уже есть аккаунт?{' '}
-                    <Link to={authRoutes.signin.path}>Войдите</Link>
-                  </Typography>
-                  <Button type="submit">{authRoutes.signup.name}</Button>
-                </>
-              )}
-            </Stack>
-          </Stack>
-        </form>
+        {isSignup ? (
+          <SignupForm
+            setMessage={setMessage}
+            setTokenPayload={setTokenPayload}
+          />
+        ) : (
+          <SigninForm
+            setMessage={setMessage}
+            setTokenPayload={setTokenPayload}
+          />
+        )}
+        <Snackbar open={open} onClose={() => setMessage(null)}>
+          <Alert severity="error">{message}</Alert>
+        </Snackbar>
       </Paper>
     </Box>
   )

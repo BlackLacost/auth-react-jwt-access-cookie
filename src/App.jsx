@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Layout } from './components/Layout'
+import { AdminPage } from './pages/AdminPage'
 import { AuthPage } from './pages/AuthPage'
 import { BasketPage } from './pages/BasketPage'
 import { ProductsPage } from './pages/ProductsPage'
@@ -7,6 +8,7 @@ import { ProductsPage } from './pages/ProductsPage'
 export const routes = {
   products: { path: '/', name: 'Товары', Component: ProductsPage },
   basket: { path: '/basket', name: 'Корзина', Component: BasketPage },
+  admin: { path: '/admin', name: 'Админка', Component: AdminPage },
 }
 
 export const authRoutes = {
